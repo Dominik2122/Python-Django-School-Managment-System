@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+  <h1>{{teacher.user.username}}</h1>
+  <a href="{% url 'teacher:update' pk=teacher.pk %}"> UPDATE ME </a>
+  </form>
+</div>
+
+{% endblock %}
