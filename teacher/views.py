@@ -82,24 +82,24 @@ class ClassDetails(WhichUserMixin, DetailView):
         context['form'] = GradeForm()
         return context
 
-    def post(self, request,*args, **kwargs):
-        teachers = Teacher.objects.all()
-        students = Student.objects.all()
-        teacher_list = []
-        students_list = []
-        for teacher in teachers:
-            teacher_list.append(teacher.user.username)
-        for student in students:
-            students_list.append(student.user.username)
-        if self.request.user.is_authenticated and self.request.user.username in teacher_list:
-            self.current_teacher = Teacher.objects.get(user = self.request.user)
-            self.current_student = None
-        test = Tests.objects.all().filter(grade = None, teacher = self.current_teacher).first()
-
-        form = GradeForm(request.POST)
-        if form.is_valid():
-            form =  form.cleaned_data['grade']
-            test.grade = int(form)
-            test.save()
-
-        return HttpResponse("Here's the text of the Web page.")
+    # def post(self, request,*args, **kwargs):
+    #     teachers = Teacher.objects.all()
+    #     students = Student.objects.all()
+    #     teacher_list = []
+    #     students_list = []
+    #     for teacher in teachers:
+    #         teacher_list.append(teacher.user.username)
+    #     for student in students:
+    #         students_list.append(student.user.username)
+    #     if self.request.user.is_authenticated and self.request.user.username in teacher_list:
+    #         self.current_teacher = Teacher.objects.get(user = self.request.user)
+    #         self.current_student = None
+    #     test = Tests.objects.all().filter(grade = None, teacher = self.current_teacher).first()
+    #
+    #     form = GradeForm(request.POST)
+    #     if form.is_valid():
+    #         form =  form.cleaned_data['grade']
+    #         test.grade = int(form)
+    #         test.save()
+    #
+    #     return HttpResponse("Here's the text of the Web page.")

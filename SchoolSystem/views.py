@@ -54,4 +54,5 @@ class HomePage(WhichUserMixin, TemplateView):
             ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
         context['ungraded_tests'] = ungraded_tests
         return context
+
     

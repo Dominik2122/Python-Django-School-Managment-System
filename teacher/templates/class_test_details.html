@@ -4,9 +4,11 @@
 
     <h2> Class</h2>
     <form method="post">
+    {% for test in ungraded_tests  %}
+    <p><a href="{% url 'teacher:test_details' pk=test.pk %}">{{test.student.user.first_name}} {{test.student.user.last_name}} - {{test.desc}}</a></p>
 
-      {% csrf_token %}
-      {% bootstrap_form form  %}
+    {% endfor %}
+
 
 
 
