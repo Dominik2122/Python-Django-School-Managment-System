@@ -40,7 +40,7 @@
     						{% if user.is_authenticated %}
                 {% if current_teacher != None %}
                 <li><a href="{% url 'teacher:detail' pk=current_teacher.pk %}" class="btn btn-simple">Infos</a></li>
-                <li><a href="{% url 'teacher:test_create'%}" class="btn btn-simple">Creat Test</a></li>
+                <li><a href="{% url 'teacher:test_create'%}" class="btn btn-simple">Create Test</a></li>
                 {% endif %}
                 {% if current_student != None %}
                 <li><a href="{% url 'students:detail' pk=current_student.pk %}" class="btn btn-simple">Infos</a></li>

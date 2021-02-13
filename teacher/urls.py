@@ -7,5 +7,6 @@ urlpatterns = [
     path('detail/<int:pk>/', views.TeacherDetails.as_view(), name = 'detail'),
     path('create/test/', views.CreateTest.as_view(), name = 'test_create'),
     path('tests/details/<int:pk>/', views.TestDetails.as_view(), name = 'test_details'),
-    path('tests/grade/<int:pk>', views.TestUpdate.as_view(), name = 'test_update')
+    path('tests/grade/<int:pk>', views.TestUpdate.as_view(), name = 'test_update'),
+    path("class/<int:pk>", views.ClassDetails.as_view(), name  = 'class')
 ]

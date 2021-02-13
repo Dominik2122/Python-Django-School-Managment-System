@@ -36,6 +36,8 @@ class HomePage(WhichUserMixin, TemplateView):
     def get_template_names(self):
         if self.current_teacher:
             return ['teacher_index.html']
+        elif self.current_student:
+            return['student_index.html']
         else:
             return ['index.html']
     def get_context_data(self,**kwargs):
@@ -52,3 +54,4 @@ class HomePage(WhichUserMixin, TemplateView):
             ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
         context['ungraded_tests'] = ungraded_tests
         return context
+    
