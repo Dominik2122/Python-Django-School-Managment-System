@@ -19,11 +19,16 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"></script>
 
+      <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/master.css'%}"/>
 
 
   </head>
@@ -39,11 +44,11 @@
     					<ul class="nav navbar-nav navbar-right">
     						{% if user.is_authenticated %}
                 {% if current_teacher != None %}
-                <li><a href="{% url 'teacher:detail' pk=current_teacher.pk %}" class="btn btn-simple">Infos</a></li>
+                <li><a href="{% url 'teacher:detail' pk=current_teacher.pk %}" class="btn btn-simple">My Profile</a></li>
                 <li><a href="{% url 'teacher:test_create'%}" class="btn btn-simple">Create Test</a></li>
                 {% endif %}
                 {% if current_student != None %}
-                <li><a href="{% url 'students:detail' pk=current_student.pk %}" class="btn btn-simple">Infos</a></li>
+                <li><a href="{% url 'students:detail' pk=current_student.pk %}" class="btn btn-simple">My Profile</a></li>
                 {% endif %}
 
                 <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
@@ -55,10 +60,9 @@
     					</ul>
 
 
-
     			</div>
     		</nav>
-        <div class="container mycontent">
+        <div class="container">
           {% block content %}
 
           {% endblock %}

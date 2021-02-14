@@ -1,11 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Welcome {{user.first_name}} to EduSys!</h1>
-
-    <h2> Your ungraded test: </h2>
-    {% for test in ungraded_tests %}
-    <p><a href="{% url 'teacher:class' pk=test.classes.pk  %}">{{test.teacher.subject}} - Class: {{test.classes}} - {{test.desc}}</a> </p>
+{% load bootstrap3 %}
+    <h1>  Welcome {{user.first_name}} to EduSys!</h1>
+    <div class="col-md-4">
+      <h2>Your ungraded tests: </h2>
+      {% for test in ungraded_tests %}
+        <div id="teacher" class="clear">
+          <div class="test">
+            <h3> Class: {{test.classes}} </h3>
+              <p>{{test.teacher.subject}} - {{test.desc}}</p>
+            <a class="signup" href="{% url 'teacher:class' pk=test.classes.pk  %}">Go to!</a>
+          </div>
+          </div>
     {% endfor %}
+    </div>
+
+    <div class="col-md-4">
+    <h2> Schedulded tests: </h2>
+    {% for test in planned_tests %}
+      <div id="teacher" class="clear">
+        <div class="test">
+          <h3> Class: {{test.classes}} </h3>
+            <p>{{test.teacher.subject}} - {{test.desc}}</p>
+          <a class="signup" href="{% url 'teacher:class' pk=test.classes.pk  %}">Go to!</a>
+        </div>
+        </div>
+  {% endfor %}
+    </div>
+
+    <div class="col-md-4">
+    <h2> Create test: </h2>
+    <div id="teacher" class="clear">
+    <div class="test">
+      <form method="post">
+      {% csrf_token %}
+      {% bootstrap_form form  %}
+
+      <input type="submit" class ="signup" value="Sign up">
+
+      </form>
+    </div>
+    </div>
+    </div>
 
 
 {% endblock %}

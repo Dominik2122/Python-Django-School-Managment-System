@@ -1,0 +1,59 @@
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #A8DADC;
+  margin: 0;
+}
+h1 {
+  font: bold 40px Arial, Helvetica;
+}
+
+a {
+  color: black
+}
+
+.navbar {
+  background-color: #457B9D;
+}
+.navbar-brand {
+  font: bold 20px Arial, Helvetica;
+  color: #fff;
+}
+
+.btn-simple {
+  font: bold 20px Arial, Helvetica;
+  color: #fff;
+}
+
+
+#teacher {
+	text-align: center;
+	width:100%;
+}
+#teacher .test {
+	font: 14px Arial, Helvetica;
+	background: #fff;
+	border: 1px solid #ddd;
+	color: #333;
+	padding: 10px;
+	width:100%;
+	float: left;
+	position: relative;
+}
+#teacher h3 {
+	font: bold 20px Arial, Helvetica;
+}
+#teacher .signup {
+	position: relative;
+	padding: 8px 20px;
+	margin: 5px 0 0 0;
+	color: #fff;
+	font: bold 14px Arial, Helvetica;
+	text-transform: uppercase;
+	display: inline-block;
+	background-color: #457B9D;
+}
+#teacher .signup:hover {
+	background-color: #A8DADC;
+}

@@ -20,6 +20,8 @@ class Tests(models.Model):
     student = models.ForeignKey(Student, on_delete = models.CASCADE, null = True)
     subject = models.CharField(max_length=10, choices=SUBJECTS, null = True)
     classes = models.ForeignKey(Classes, on_delete = models.CASCADE, null = True)
+    created_at = models.DateTimeField(auto_now=True)
+    planned = models.DateField(null = True)
     class Grades(models.IntegerChoices):
         F = 1
         E = 2
@@ -30,4 +32,6 @@ class Tests(models.Model):
 
     grade = models.IntegerField(choices = Grades.choices, null = True)
     def __str__(self):
-        return self.desc 
+        return self.desc
+    class Meta:
+        ordering = ["-created_at"]
