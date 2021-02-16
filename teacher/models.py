@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from students.models import Classes, Student
 # Create your models here.
-SUBJECTS = (('En', 'English'), ('M','Maths'), ('PE','PE'), ('His','History'), ('Bio','Biology'), ('Ph','Physics'))
+SUBJECTS = (('English', 'English'), ('Maths','Maths'), ('PE','PE'), ('History','History'), ('Biology','Biology'), ('Physics','Physics'))
 
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

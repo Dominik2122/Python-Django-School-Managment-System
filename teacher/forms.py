@@ -27,3 +27,8 @@ class TestForm(forms.ModelForm):
     class Meta:
         model = Tests
         fields = ('desc', 'classes','planned')
+        labels = {
+        "desc": 'Description',
+        'classes': "Class",
+        'planned': "Date [Y-M-D]"    
+    }

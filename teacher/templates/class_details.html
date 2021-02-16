@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<h1>{{classes.name}}</h1>
+<div id="teacher" class="clear">
+  <div class="test">
+{% for student in students %}
+<div class="col-md-3">
+<h3>{{student.user.first_name}} {{student.user.last_name}}</h3>
+{% for test in students_tests %}
+{% if test.student == student %}
+<p>{{test.desc}} - {{test.grade}}<p>
+{% endif %}
+{% endfor %}
+{% for mean in means_list %}
+{% if mean.1 == student %}
+<h3>Mean from all tests: {{mean.0}}</h3>
+{% endif %}
+{% endfor %}
+</div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

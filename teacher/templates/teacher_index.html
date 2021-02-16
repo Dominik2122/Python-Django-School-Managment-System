@@ -9,7 +9,7 @@
           <div class="test">
             <h3> Class: {{test.classes}} </h3>
               <p>{{test.teacher.subject}} - {{test.desc}}</p>
-            <a class="signup" href="{% url 'teacher:class' pk=test.classes.pk  %}">Go to!</a>
+            <a class="signup" href="{% url 'teacher:class_grading' pk=test.pk  %}">Go to!</a>
           </div>
           </div>
     {% endfor %}
@@ -22,7 +22,7 @@
         <div class="test">
           <h3> Class: {{test.classes}} </h3>
             <p>{{test.teacher.subject}} - {{test.desc}}</p>
-          <a class="signup" href="{% url 'teacher:class' pk=test.classes.pk  %}">Go to!</a>
+          <a class="signup" href="{% url 'teacher:class_grading' pk=test.pk  %}">Go to!</a>
         </div>
         </div>
   {% endfor %}

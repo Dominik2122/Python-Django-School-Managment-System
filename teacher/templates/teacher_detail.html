@@ -3,9 +3,36 @@
 
 {% block content %}
 <div class="container">
-  <h1>{{teacher.user.username}}</h1>
-  <a href="{% url 'teacher:update' pk=teacher.pk %}"></a>
-  </form>
+  <h1>Your profile:</h1>
+  <div id="teacher" class="clear">
+  <div class="test">
+    <div class="col-md-4">
+    <h3> First and last name:</h3>
+    <h3> Subject:</h3>
+    <h3> Classes: </h3>
+
+    </div>
+    <div class="col-md-4">
+    <h3>{{teacher.user.first_name}} {{teacher.user.last_name}}</h3>
+    <h3>{{teacher.subject}}</h3>
+    {% for class in classes %}
+    <h3><a href="{% url 'teacher:class' pk=class.pk  %}">{{class.name}}</a></h3>
+    {% endfor %}
+    </div>
+  <a class="signup" href="{% url 'teacher:update' pk=teacher.pk %}">Update infos!</a>
+</div>
+</div>
+<h1>Last graded tests:</h1>
+<div id="teacher" class="clear">
+<div class="test">
+{% for test in tests %}
+<div class="col-md-4">
+  <h3> Class: {{test.classes}} </h3>
+  <p>{{test.teacher.subject}} - {{test.desc}}</p>
+</div>
+{% endfor %}
+</div>
+</div>
 </div>
 
 {% endblock %}
