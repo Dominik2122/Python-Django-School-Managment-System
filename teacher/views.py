@@ -7,6 +7,7 @@ from SchoolSystem.views import WhichUserMixin
 from students.models import Classes, Student
 from django import forms
 from django.db import models
+from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 class TeacherUpdate(UpdateView):
     model = Teacher
@@ -93,7 +94,9 @@ class ClassDetails(WhichUserMixin, DetailView):
                 i += 1
                 mean += int(test.grade)
             if i != 0:
-                mean = [mean/i, student]
+                num = mean/i
+                mean = "{:.2f}".format(num)
+                mean = [mean, student]
             else:
                 mean = ['None', student]
             means_list.append(mean)
@@ -133,9 +136,10 @@ class TestDetails(WhichUserMixin, DetailView):
         if self.request.user.is_authenticated and self.request.user.username in teacher_list:
             self.current_teacher = Teacher.objects.get(user = self.request.user)
             self.current_student = None
-        test = Tests.objects.all().filter(grade = None, teacher = self.current_teacher)
+        test = Tests.objects.all().filter(grade = None, teacher = self.current_teacher,  desc = self.get_object().desc,  classes = self.get_object().classes)
         grades = request.POST.getlist('grade')
         i = 0
+
         for test_l in list(test):
             for element in SUBJECTS:
                 if int(element[0]) == int(grades[i]):
@@ -143,4 +147,4 @@ class TestDetails(WhichUserMixin, DetailView):
                     test_l.grade = int(element[0])
                     test_l.save()
             i += 1
-        return reverse_lazy('home')
+        return HttpResponseRedirect(reverse_lazy('home'))

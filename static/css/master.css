@@ -15,6 +15,8 @@ a {
 
 .navbar {
   background-color: #457B9D;
+  font: bold 20px Arial, Helvetica;
+  color: #fff;
 }
 .navbar-brand {
   font: bold 20px Arial, Helvetica;
@@ -25,6 +27,8 @@ a {
   font: bold 20px Arial, Helvetica;
   color: #fff;
 }
+
+
 
 
 #teacher {

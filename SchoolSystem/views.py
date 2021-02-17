@@ -33,6 +33,9 @@ class WhichUserMixin:
         context = super().get_context_data(**kwargs)
         context['current_teacher'] = self.current_teacher
         context['current_student'] = self.current_student
+        if self.current_teacher:
+            classes = self.current_teacher.classes.all()
+            context['classes'] = list(classes)
         return context
 
 
@@ -72,6 +75,7 @@ class HomePage(WhichUserMixin, FormView):
         for tup in ungraded_tests_classes:
             ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
         context['planned_tests'] = ungraded_tests[:5]
+
 
         return context
 
