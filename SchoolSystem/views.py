@@ -53,30 +53,35 @@ class HomePage(WhichUserMixin, FormView):
             return ['index.html']
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
-        tests = Tests.objects.filter(grade = None, teacher = self.current_teacher, planned__lte=datetime.date(datetime.now()))
-        ungraded_tests = tests.values_list('classes', 'desc')
-        list(ungraded_tests)
-        ungraded_tests_classes = []
-        for tup in ungraded_tests:
-            if tup not in ungraded_tests_classes:
-                ungraded_tests_classes.append(tup)
-        ungraded_tests = []
-        for tup in ungraded_tests_classes:
-            ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
-        context['ungraded_tests'] = ungraded_tests[:5]
-        tests = Tests.objects.filter(grade = None, teacher = self.current_teacher, planned__gte=datetime.date(datetime.now()))
-        ungraded_tests = tests.values_list('classes', 'desc')
-        list(ungraded_tests)
-        ungraded_tests_classes = []
-        for tup in ungraded_tests:
-            if tup not in ungraded_tests_classes:
-                ungraded_tests_classes.append(tup)
-        ungraded_tests = []
-        for tup in ungraded_tests_classes:
-            ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
-        context['planned_tests'] = ungraded_tests[:5]
-
-
+        if self.current_teacher:
+            tests = Tests.objects.filter(grade = None, teacher = self.current_teacher, planned__lte=datetime.date(datetime.now()))
+            ungraded_tests = tests.values_list('classes', 'desc')
+            list(ungraded_tests)
+            ungraded_tests_classes = []
+            for tup in ungraded_tests:
+                if tup not in ungraded_tests_classes:
+                    ungraded_tests_classes.append(tup)
+            ungraded_tests = []
+            for tup in ungraded_tests_classes:
+                ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
+            context['ungraded_tests'] = ungraded_tests[:5]
+            tests = Tests.objects.filter(grade = None, teacher = self.current_teacher, planned__gte=datetime.date(datetime.now()))
+            ungraded_tests = tests.values_list('classes', 'desc')
+            list(ungraded_tests)
+            ungraded_tests_classes = []
+            for tup in ungraded_tests:
+                if tup not in ungraded_tests_classes:
+                    ungraded_tests_classes.append(tup)
+            ungraded_tests = []
+            for tup in ungraded_tests_classes:
+                ungraded_tests.append(Tests.objects.filter(grade = None, teacher = self.current_teacher, classes = tup[0], desc = tup[1]).first())
+            context['planned_tests'] = ungraded_tests[:5]
+        elif self.current_student:
+            planned_tests = Tests.objects.all().filter(planned__gte=datetime.date(datetime.now()), student = self.current_student)
+            last_tests = Tests.objects.all().filter(grade__isnull = False, student = self.current_student)
+            context['planned_tests'] = planned_tests
+            context['last_tests'] = last_tests[:5]
+            context['subjects'] =['English','Maths','PE','History','Biology','Physics']
         return context
 
     def form_valid(self, form):
@@ -84,20 +89,19 @@ class HomePage(WhichUserMixin, FormView):
         teacher = Teacher.objects.get(user = self.request.user)
         class_name = form.cleaned_data['classes']
         desc =  form.cleaned_data['desc']
+        planned = form.cleaned_data['planned']
         classes = Classes.objects.get(name = class_name)
         students = classes.students.all()
         students_list = list(students)
         if len(students_list)>1:
             students = students_list.pop()
-            print(students)
             for student in students_list:
-                Tests.objects.create(desc=desc, teacher = teacher, classes = classes, student = student, subject = teacher.subject )
+                Tests.objects.create(desc=desc, teacher = teacher, classes = classes, student = student, subject = teacher.subject, planned = planned  )
         else:
             students = list(students)[0]
-            print(students)
         test.teacher = teacher
         test.subject = teacher.subject
         test.student = students
-        print(students)
+        test.planned = planned
         test.save()
         return super().form_valid(form)

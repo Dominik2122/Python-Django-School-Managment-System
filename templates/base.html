@@ -45,6 +45,17 @@
                 {% endif %}
                 {% if current_student != None %}
                 <li><a href="{% url 'students:detail' pk=current_student.pk %}" class="btn btn-simple">My Profile</a></li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn-simple" href="#" id="navbardrop" data-toggle="dropdown">My grades</a>
+                <div class="dropdown-menu">
+                  <ul>
+                  {% for subject in subjects %}
+                  <li class ="btn-simple"><a class="dropdown-item" href="{% url 'students:grade' str=subject %}">{{subject}}</a></li>
+                  {% endfor %}
+                </ul>
+                </div>
+              </li>
+
                 {% endif %}
 
                 <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
@@ -54,8 +65,6 @@
     						      <li><a href="{% url 'accounts:signup' %}" class="btn btn-simple">Sign up</a></li>
     						{% endif %}
     					</ul>
-
-
     			</div>
     		</nav>
         <div class="container">

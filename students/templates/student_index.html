@@ -1,11 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Welcome {{user.first_name}} to EduSys!</h1>
-
+    <div class="col-md-6">
     <h2> Your recent tests: </h2>
-    {% for grade in test_list %}
-    <h2> h1 </h2>
-    {% endfor %}
+    {% for test in last_tests %}
+      <div id="teacher" class="clear">
+        <div class="test">
+            <h3>{{test.teacher.subject}} - {{test.desc}}</h3>
+            <p>Grade: {{test.grade}}</p>
+        </div>
+        </div>
+  {% endfor %}
+  </div>
+    <div class="col-md-6">
+    <h2> Schedulded tests: </h2>
+    {% for test in planned_tests %}
+      <div id="teacher" class="clear">
+        <div class="test">
+          <h3> {{test.teacher.subject}} - {{test.desc}} </h3>
+          <h3> {{test.planned}} </h3>
+        </div>
+        </div>
+  {% endfor %}
+    </div>
 
 
 {% endblock %}

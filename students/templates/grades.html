@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-12">
+<div id="teacher" class="clear">
+<div class="test">
+<h3>{{subject}}</h3>
+<h3> Your current mean: {{mean}}</h3>
+</div></div>
+</div>
+<br><br><br><br>
+<div class="col-md-12"><br>
+  </div>
+{% if tests %}
+{% for test in tests %}
+<div class="col-md-3">
+<div id="teacher" class="clear">
+<div class="test">
+<h3>{{test.desc}}</h3>
+<h3>Grade: {{test.grade}}</h3>
+<p>Date: {{test.planned}}
+</div></div>
+</div>
+{% endfor %}
+{% else %}
+<div class="col-md-12">
+<div id="teacher" class="clear">
+<div class="test">
+<h3> You don't have graded test yet!</h3>
+</div></div>
+</div>
+{% endif %}
+
+
+
+{% endblock %}

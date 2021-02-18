@@ -9,10 +9,10 @@ from django import forms
 from django.db import models
 from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
-class TeacherUpdate(UpdateView):
+class TeacherUpdate(WhichUserMixin, UpdateView):
     model = Teacher
     fields = ['subject', 'form_teacher', 'classes']
-    template_name = 'update.html'
+    template_name = 'updat.html'
     success_url = reverse_lazy('home')
 
 
